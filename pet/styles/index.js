@@ -55,6 +55,16 @@ const styles = StyleSheet.create({
         color: "#616161",
         textDecorationLine: "underline",
         fontSize: 16
+    },
+    viewIn: {
+        flex: 15,
+        width: 100+"%",
+        alignItems: "center",
+        backgroundColor: "#FFEFC5",
+        justifyContent: "center"
+    },
+    flat: {
+        width: 100 +"%"
     }
 });
 
