@@ -4,6 +4,7 @@ import Menu from "../pages/Menu";
 import CadastrarPet from "../pages/CadastrarPet";
 import SelecionarPet from "../pages/SelecionarPet";
 import Pet from "../pages/Pet";
+import CartaoVacinasMenu from "./vacinas";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ class Route extends Component{
                 <Stack.Screen name="CadastrarPet" component={CadastrarPet} options={{headerShown: false}} />
                 <Stack.Screen name="Pet" component={Pet} options={{headerShown: false}} />
                 <Stack.Screen name="SelecionarPet" component={SelecionarPet} options={{headerShown: false}} />
+                <Stack.Screen name="CartaoVacinasMenu" component={CartaoVacinasMenu} options={{headerShown: false}} />
             </Stack.Navigator>
         );
     }

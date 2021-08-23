@@ -27,6 +27,24 @@ class Pets {
             return pets;
         }
     }
+
+    async getPetName(petId){
+        const user = new User();
+        const userId = await user.isLogged();
+        if(userId){
+            const pets = await PetRepository.getPetName(petId, userId);
+            return pets;
+        }
+    }
+
+    async getMedicamentos(type, id){
+        const user = new User();
+        const userId = await user.isLogged();
+        if(userId){
+            const medicamentos = await PetRepository.getMedicamentos(type, id, userId);
+            return medicamentos;
+        }
+    }
 }
 
 export default Pets;

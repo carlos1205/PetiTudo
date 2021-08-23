@@ -10,12 +10,12 @@ class Menu extends Component {
             <View style={styles.Tela}>
                 <View style={[styles.viewIn, StyleMenu.viewMenu]}>
                     <ScrollView style={styles.flat}>
-                        <ButtonMenu iconName="clipboard" value="Cartão de Vacina" href="#"/>
+                        <ButtonMenu iconName="clipboard" value="Cartão de Vacina" navigation={this.props.navigation} page='CartaoVacinasMenu'/>
                         <ButtonMenu iconName="virus-slash" value="Agenda" href="#"/>
                         <ButtonMenu iconName="hippo" value="Pets" navigation={this.props.navigation} page='Pet'/>
                     </ScrollView>
                     <ButtonMenu iconName="plus" value="Adotei um novo Pet" navigation={this.props.navigation} page='CadastrarPet'/>
-                    <ButtonLogout iconName="plus" value="Sair" navigation={this.props.navigation}/>  
+                    <ButtonLogout value="Sair" navigation={this.props.navigation} />  
                 </View>                
             </View>
         );

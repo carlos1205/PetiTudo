@@ -5,7 +5,11 @@ import styles from "../../styles";
 
 class ButtonMenu extends Component {
     action(){
-        this.props.navigation.navigate(this.props.page);
+        var type = null;
+        if(this.props.type != null){
+            type = {type: this.props.type}    
+        }
+        this.props.navigation.navigate(this.props.page, type);
     }
 
     render(){

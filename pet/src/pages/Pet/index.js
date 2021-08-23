@@ -87,6 +87,6 @@ const style = StyleSheet.create({
     title: {
         marginBottom: 5 + "%"
     }
-})
+});
 
 export default PetPage;

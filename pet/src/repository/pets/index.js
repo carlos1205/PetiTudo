@@ -50,6 +50,33 @@ class PetRepository {
             console.error(err);
         }
     }
+
+    async getPetName(petId, userId){
+        try{
+            var pet = await firebase.database().ref(`user/${userId}/pets/${petId}`).once('value');
+            return pet.val().name;
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    async getMedicamentos(type, petId, userId){
+        try{
+            var pet = await firebase.database().ref(`user/${userId}/pets/${petId}/${type}`).once('value');
+            var medication = [];
+            pet.forEach((snapshot) => {
+                const med = {
+                    id: snapshot.key,
+                    name: snapshot.val().name,
+                    data: snapshot.val().data
+                }
+                medication.push(med);
+            });
+            return medication;
+        }catch(err){
+            console.error(err);
+        }
+    }
 }
 
 export default new PetRepository();

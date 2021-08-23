@@ -25,6 +25,7 @@ class SelecionarPet extends Component{
         const itens = this.state.pets.map((pet) => {
             return (<PetItem key={pet.id} id={pet.id} nome={pet.name} especie={pet.specie} navigation={this.props.navigation} onGoBack={this.props.route.params.onGoBack}/>);
         });
+        
         return(
             <View style={[styles.viewIn]}>
                 <Text h1
