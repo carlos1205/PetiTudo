@@ -3,6 +3,7 @@ import {View, Text, ScrollView} from "react-native";
 import styles from "../../styles";
 import Pets from "../../service/pets";
 import Item from "./item";
+import ButtonSlim from "../../components/buttonSlim";
 
 class Medicine extends Component{
     constructor(props){
@@ -22,15 +23,20 @@ class Medicine extends Component{
         const pet = new Pets();
         const medicamentos = await pet.getMedicamentos(this.props.route.params.type, id);
         const petName = await pet.getPetName(this.state.petId);
+        const insert = {
+            petId: id,
+            type: this.props.route.params.type
+        }
         this.setState({
             medList: medicamentos,
-            petName: petName
+            petName: petName,
+            inserir: insert
         });
     }
 
     render(){
         const list = this.state.medList.map(item => {
-            return (<Item key={item.id} name={item.name} data={item.data}/>);
+            return (<Item key={item.id} id={item.id} pet={this.state.petId} type={this.props.route.params.type} name={item.name} data={item.data} navigation={this.props.navigation}/>);
         });
         return(
             <View style={styles.viewIn}>
@@ -42,6 +48,7 @@ class Medicine extends Component{
                 <ScrollView style={[styles.flat]}>
                     {list}
                 </ScrollView>  
+                <ButtonSlim value="Inserir Novo" navigation={this.props.navigation} page="CadastrarMedicamento" parametros={this.state.inserir}/>  
             </View>
         );
     }

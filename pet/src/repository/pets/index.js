@@ -22,6 +22,15 @@ class PetRepository {
         }
     }
 
+    async deletePet(userId, pet){
+        try{
+            await firebase.database().ref(`user/${userId}/pets/${pet}`).remove();
+            return true;
+        }catch(err){
+            console.error(err);
+        }
+    }
+
     async listar(id){
         try{
             const userRef = await firebase.database().ref(`user/${id}/pets`);
@@ -73,6 +82,35 @@ class PetRepository {
                 medication.push(med);
             });
             return medication;
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    async cadastrarMedicamento(userId, petId, tipo, payload){
+        try{
+            const medicamentoRef = await firebase.database().ref(`user/${userId}/pets/${petId}/${tipo}`);
+            const newMedicamentoRef = medicamentoRef.push();
+            console.log(newMedicamentoRef);
+            newMedicamentoRef.set({
+                name: payload.name,
+                data: payload.data,
+                responsavel: payload.responsavel,
+                dose: payload.dose,
+                fabricante: payload.fabricante,
+                lote: payload.lote,
+                proxima: payload.proxima
+            });
+            return true;
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    async getMedicamento(userId, petId, tipo, id){
+        try{
+            const medicamentoRef = await firebase.database().ref(`user/${userId}/pets/${petId}/${tipo}/${id}`).once('value');
+            return medicamentoRef.val();
         }catch(err){
             console.error(err);
         }

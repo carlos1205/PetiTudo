@@ -3,6 +3,8 @@ import {View, Text, StyleSheet} from "react-native";
 import Pet from "../../service/pets";
 import Specie from "../../service/species";
 import styles from "../../styles";
+import ButtonGoBack from "../../components/buttonGoBack";
+import ButtonDanger from "../../components/buttonDanger";
 
 class PetPage extends Component {
     constructor(props){
@@ -34,6 +36,14 @@ class PetPage extends Component {
         });
     }
 
+    async remover(){
+        const pet = new Pet();
+        const res = await pet.deletePet(this.state.id);
+        if(res){
+            this.props.navigation.goBack('SelecionarPet');
+        }
+    }
+
     render(){
         return(
             <View style={[styles.viewIn, style.petView]}>
@@ -61,7 +71,9 @@ class PetPage extends Component {
                 <View style={style.contentText}>
                     <Text style={[style.text, style.label]}>Sexo: </Text> 
                     <Text style={style.text}>{this.state.sex}</Text>
-                </View>               
+                </View>
+                <ButtonDanger value="Remover" onPress={()=> this.remover()} />
+                <ButtonGoBack value="voltar" navigation={this.props.navigation}/>
             </View>
         );
     }
@@ -75,7 +87,8 @@ const style = StyleSheet.create({
         flexDirection:'row',
         flexWrap:'wrap',
         justifyContent: 'space-between',
-        width: 75 + "%"
+        width: 75 + "%",
+        paddingRight: 15
     },
     text: {
         fontSize: 20,

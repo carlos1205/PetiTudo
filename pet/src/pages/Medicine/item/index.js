@@ -1,12 +1,23 @@
 import React, {Component} from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Link from "../../../components/link";
 import styles from "../../../styles";
 
 class Item extends Component{
+    action(){
+        this.props.navigation.navigate('MedicamentoDetalhe', {
+            pet: this.props.pet,
+            medicamento: this.props.id,
+            tipo: this.props.type
+        });
+    }
+
     render(){
         return(
-            <View style={[styles.viewIn, style.petView]}>
+            <TouchableOpacity 
+                style={[styles.viewIn, style.petView]}
+                onPress={()=>{this.action()}}
+            >
                 <View style={style.contentText}>
                     <Text style={[style.text, style.label]}>Data: </Text> 
                     <Text style={style.text}>{this.props.data}</Text>
@@ -16,9 +27,11 @@ class Item extends Component{
                         <Text style={[style.text, style.label]}>Tipo: </Text> 
                         <Text style={style.text}>{this.props.name}</Text>   
                     </View>
-                    <Link navigation={this.props.navigation} href='RecuperarSenha' value="Ver detalhes"/>
+                    <Text style={styles.linkPadrao}>
+                        Ver Detalhes
+                    </Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }

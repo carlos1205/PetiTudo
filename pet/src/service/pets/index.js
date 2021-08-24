@@ -10,6 +10,14 @@ class Pets {
         }
     }
 
+    async deletePet(pet){
+        const user = new User();
+        const userId = await user.isLogged();
+        if(userId){
+            return await PetRepository.deletePet(userId, pet);
+        }
+    }
+
     async listar(){
         const user = new User();
         const userId = await user.isLogged();
@@ -43,6 +51,22 @@ class Pets {
         if(userId){
             const medicamentos = await PetRepository.getMedicamentos(type, id, userId);
             return medicamentos;
+        }
+    }
+
+    async cadastrarMedicamento(petId, tipo, payload){
+        const user = new User();
+        const userId = await user.isLogged();
+        if(userId){
+            return await PetRepository.cadastrarMedicamento(userId, petId, tipo, payload);
+        }
+    }
+
+    async getMedicamento(petId, tipo, id){
+        const user = new User();
+        const userId = await user.isLogged();
+        if(userId){
+            return await PetRepository.getMedicamento(userId, petId, tipo, id);
         }
     }
 }

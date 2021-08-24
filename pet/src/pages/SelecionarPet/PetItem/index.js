@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import {TouchableOpacity, Text, StyleSheet} from "react-native";
+import {TouchableOpacity, Text, StyleSheet, View} from "react-native";
 import Specie from "../../../service/species";
+import styles from "../../../styles";
 
 class PetItem extends Component {
     constructor(props){
@@ -24,31 +25,53 @@ class PetItem extends Component {
     render(){
         return(
             <TouchableOpacity 
-                style={style.item}
+                style={[styles.viewIn, style.petView]}
                 onPress={() => this.selected()}
             > 
-                <Text style={style.center}>
-                    Nome: {this.props.nome}
-                </Text>
-                <Text style={style.center}>
-                    Espécie: {this.state.specie}
-                </Text>
+                <View style={style.contentText}>
+                    <Text style={[style.text, style.label]}>Nome: </Text> 
+                    <Text style={style.text}>{this.props.nome}</Text>
+                </View>
+                <View style={style.contentText}>
+                    <Text style={[style.text, style.label]}>Espécie: </Text> 
+                    <Text style={style.text}>{this.state.specie}</Text>
+                </View>
             </TouchableOpacity>
         );
     }
 } 
 
+
 const style = StyleSheet.create({
-    center: {
-        textAlign: "center"
+    petView: {
+        marginTop: 10,
+        alignSelf: "center",
+        width: 80 + "%",
+        borderColor: "#FFBD3E",
+        borderWidth: 7,
+        borderRadius: 10,
+        backgroundColor: "#FFDC6E"
     },
-    item: {
-        backgroundColor: '#fff',
-        marginTop: 15,
-        width: 60 + "%",
-        alignSelf: 'center',
-        borderWidth: 1,
-        borderColor: '#FFBD3E'
+    contentText: {
+        flexDirection:'row',
+        flexWrap:'wrap',
+        width: 100+"%",
+    },
+    beetween: {
+        justifyContent: "space-between",
+        paddingRight: 5
+    },
+    subContentText: {
+        flexDirection:'row',
+        flexWrap:'wrap',
+        width: 60 + "%"
+    },
+    text: {
+        fontSize: 18,
+        textAlign: 'left'
+    },
+    label: {
+        fontWeight: 'bold'
     }
 });
 
